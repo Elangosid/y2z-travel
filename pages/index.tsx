@@ -1,5 +1,5 @@
 // pages/index.tsx
-import { GetServerSideProps } from "next";
+import { GetServerSidePropsContext } from "next";
 import ItineraryList from "../components/ItineraryColumn";
 import { Activity } from "@/types/type";
 
@@ -21,7 +21,7 @@ export default function Home({ items }: HomeProps) {
     </main>
   );
 }
-export async function getServerSideProps(context: any) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
     const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
     const host = process.env.VERCEL_URL || context.req.headers.host;
