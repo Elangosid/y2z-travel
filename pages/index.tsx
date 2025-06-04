@@ -23,10 +23,7 @@ export default function Home({ items }: HomeProps) {
 }
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   try {
-    const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
-    const host = process.env.VERCEL_URL || context.req.headers.host;
-    const baseUrl = `${protocol}://${host}`;
-
+    const baseUrl = `https://y2z-travel.vercel.app`;
     const res = await fetch(`${baseUrl}/api/places`);
 
     if (!res.ok) {
