@@ -5,9 +5,11 @@ import { Activity } from "@/types/type";
 
 interface HomeProps {
   items: Activity[];
+  base: string;
 }
 
-export default function Home({ items }: HomeProps) {
+export default function Home({ items, base }: HomeProps) {
+  console.log("base", base)
   return (
     <main className="flex flex-col md:flex-row h-screen">
       <ItineraryList initialData={items} />
@@ -35,6 +37,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     return {
       props: {
         items: data,
+        base: `${baseUrl}/api/places`
       },
     };
   } catch (error) {
