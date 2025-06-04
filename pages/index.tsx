@@ -1,5 +1,4 @@
 // pages/index.tsx
-import { GetServerSidePropsContext } from "next";
 import ItineraryList from "../components/ItineraryColumn";
 import { Activity } from "@/types/type";
 
@@ -8,8 +7,7 @@ interface HomeProps {
   base: string;
 }
 
-export default function Home({ items, base }: HomeProps) {
-  console.log("base", base)
+export default function Home({ items }: HomeProps) {
   return (
     <main className="flex flex-col md:flex-row h-screen">
       <ItineraryList initialData={items} />
@@ -23,7 +21,7 @@ export default function Home({ items, base }: HomeProps) {
     </main>
   );
 }
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps() {
   try {
     const baseUrl = `https://y2z-travel.vercel.app`;
     const res = await fetch(`${baseUrl}/api/places`);
@@ -36,8 +34,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
     return {
       props: {
-        items: data,
-        base: `${baseUrl}/api/places`
+        items: data
       },
     };
   } catch (error) {
